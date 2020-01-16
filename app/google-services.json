@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "167172172706",
+    "firebase_url": "https://talktome-3300b.firebaseio.com",
+    "project_id": "talktome-3300b",
+    "storage_bucket": "talktome-3300b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167172172706:android:062192b1fb31be16fee0fb",
+        "android_client_info": {
+          "package_name": "com.apptalktomechat.talktome"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "167172172706-h2iohdv3q0rqbfb64l0oo7kitbs15ref.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.apptalktomechat.talktome",
+            "certificate_hash": "1d03c0043772c8abf0afe6996f5d82387b57951a"
+          }
+        },
+        {
+          "client_id": "167172172706-2isos4b589hv8ie6dqmachhrf2d578vd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCo7xgLvwZ_hg2yTfkmqrfQfOj6IR4eG74"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "167172172706-2isos4b589hv8ie6dqmachhrf2d578vd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

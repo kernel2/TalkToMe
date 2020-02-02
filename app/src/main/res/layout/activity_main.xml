@@ -16,8 +16,8 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimaryDark"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/MenuStyle">
-            //tools:ignore="MissingConstraints">
+            app:popupTheme="@style/MenuStyle"
+            tools:ignore="MissingConstraints">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -32,16 +32,16 @@
                 android:layout_marginStart="25dp"/>
 
         </androidx.appcompat.widget.Toolbar>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabl_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
-        app:tabSelectedTextColor="@color/colorPrimaryDark"
-        app:tabIndicatorColor="@color/colorPrimaryDark"
-        app:tabTextColor="@color/colorPrimaryDark"/>
+        app:tabSelectedTextColor="#fff"
+        app:tabIndicatorColor="#fff"
+        app:tabTextColor="#fff"/>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"

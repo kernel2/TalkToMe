@@ -15,6 +15,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.apptalktomechat.talktome.Fragments.ChatsFragment;
+import com.apptalktomechat.talktome.Fragments.UsersFragment;
 import com.apptalktomechat.talktome.Model.User;
 import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
@@ -76,6 +78,12 @@ public class MainActivity extends AppCompatActivity {
          ViewPager viewPager = findViewById(R.id.view_pager);
 
          ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+
+         viewPagerAdapter.addFragment(new ChatsFragment(), "Chats");
+         viewPagerAdapter.addFragment(new UsersFragment(), "Users");
+
+         viewPager.setAdapter(viewPagerAdapter);
+         tabLayout.setupWithViewPager(viewPager);
 
     }
 

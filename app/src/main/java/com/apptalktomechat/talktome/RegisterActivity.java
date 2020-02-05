@@ -73,12 +73,12 @@ public class RegisterActivity extends AppCompatActivity {
                 if (task.isSuccessful()){
                     FirebaseUser firebaseUser = auth.getCurrentUser();
                     assert firebaseUser != null;
-                    String userid = firebaseUser.getUid();
+                    String userId = firebaseUser.getUid();
 
-                    reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
+                    reference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
 
                     HashMap<String, String> hashMap = new HashMap<>();
-                    hashMap.put("id",userid);
+                    hashMap.put("id",userId);
                     hashMap.put("username",username);
                     hashMap.put("email",email);
                     hashMap.put("image","default");
@@ -95,7 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     });
                 }else{
-                    Toast.makeText(RegisterActivity.this,"You can't register woth this email or password",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this,"You can't register with this email or password",Toast.LENGTH_SHORT).show();
                 }
             }
         });

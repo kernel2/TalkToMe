@@ -1,6 +1,7 @@
 package com.apptalktomechat.talktome.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.apptalktomechat.talktome.MessagingActivity;
 import com.apptalktomechat.talktome.Model.User;
 import com.apptalktomechat.talktome.R;
 import com.bumptech.glide.Glide;
@@ -35,13 +37,22 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            User user = mUsers.get(position);
+            final User user = mUsers.get(position);
             holder.username.setText(user.getUsername());
-            if ("default".equals(user.getImageURL())) {
+            if (null == user.getImageURL()) {
                 holder.profile_image.setImageResource(R.mipmap.ic_launcher);
             } else{
                 Glide.with(mContext).load(user.getImageURL()).into(holder.profile_image);
             }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, MessagingActivity.class);
+                intent.putExtra("userid", user.getId());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

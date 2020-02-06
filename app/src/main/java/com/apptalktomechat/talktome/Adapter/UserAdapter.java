@@ -16,47 +16,48 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
-    private Context mContext;
-    private List<User> mUser;
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
 
-    public  UserAdapter(Context mContext, List<User> mUser){
+    private Context mContext;
+    private List<User> mUsers;
+
+    public UserAdapter(Context mContext, List<User> mUsers){
         this.mContext = mContext;
-        this.mUser = mUser;
+        this.mUsers = mUsers;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new UserAdapter.ViewHolder(LayoutInflater.from(mContext)
-                .inflate(R.layout.user_item, parent, false));
+        View view = LayoutInflater.from(mContext).inflate(R.layout.user_item, parent, false);
+        return new UserAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        User user = mUser.get(position);
-        holder.username.setText(user.getUsername());
-        if(user.getImageURL() == null){
-            holder.profileImage.setImageResource(R.mipmap.ic_launcher);
-        }else{
-            Glide.with(mContext).load(user.getImageURL()).into(holder.profileImage);
-        }
+            User user = mUsers.get(position);
+            holder.username.setText(user.getUsername());
+            if ("default".equals(user.getImageURL())) {
+                holder.profile_image.setImageResource(R.mipmap.ic_launcher);
+            } else{
+                Glide.with(mContext).load(user.getImageURL()).into(holder.profile_image);
+            }
     }
 
     @Override
     public int getItemCount() {
-        return mUser.size();
+        return mUsers.size();
     }
 
+    class ViewHolder extends RecyclerView.ViewHolder{
+        private TextView username;
+        private ImageView profile_image;
 
-    public  class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView username;
-        public ImageView profileImage;
-
-        public ViewHolder(View itemView){
+        ViewHolder(View itemView){
             super(itemView);
-            username = itemView.findViewById(R.id.textViewUsername);
-            profileImage = itemView.findViewById(R.id.imageViewUser);
+            username = itemView.findViewById(R.id.username);
+            profile_image = itemView.findViewById(R.id.profile_image);
         }
+
     }
 }

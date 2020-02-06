@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,42 +27,46 @@ public class UsersFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private UserAdapter userAdapter;
-    private List<User> mUser;
+    private List<User> mUsers;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_users, container, false);
+         View view = inflater.inflate(R.layout.fragment_users, container, false);
+         recyclerView = view.findViewById(R.id.recycler_view);
+         recyclerView.setHasFixedSize(true);
+         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        recyclerView = view.findViewById(R.id.RecycleView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mUser = new ArrayList<>();
-        readUser();
-        return view;
+         mUsers = new ArrayList<>();
+
+         readUsers();
+
+         return view;
     }
 
-    private void readUser(){
-        final FirebaseUser fireBaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    private void readUsers() {
+
+        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
 
-        reference.addValueEventListener(new ValueEventListener(){
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mUser.clear();
-                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    User user = snapshot.getValue(User.class);
-
-                    assert user != null;
-                    assert fireBaseUser != null;
-                    String idf = fireBaseUser.getUid();
-                    if(!user.getId().equals(idf)){
-                        mUser.add(user);
-                    }
+                mUsers.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                        User user = snapshot.getValue(User.class);
+                    if (user == null) throw new AssertionError();
+                    if (firebaseUser == null) throw new AssertionError();
+                        if (!user.getId().equals(firebaseUser.getUid())){
+                            mUsers.add(user);
+                        }
                 }
+                    userAdapter = new UserAdapter(getContext(), mUsers);
+                    recyclerView.setAdapter(userAdapter);
 
-                userAdapter = new UserAdapter(getContext(),mUser);
-                recyclerView.setAdapter(userAdapter);
             }
 
             @Override

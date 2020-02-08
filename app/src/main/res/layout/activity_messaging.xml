@@ -61,7 +61,8 @@
             android:background="@android:color/transparent"
             android:hint="@string/type_a_message"
             android:layout_toLeftOf="@id/btn_send"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/btn_send" />
 
         <ImageButton
             android:layout_width="40dp"

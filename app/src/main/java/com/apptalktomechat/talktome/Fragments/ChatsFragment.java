@@ -40,4 +40,12 @@ public class ChatsFragment extends Fragment {
 
         return view;
     }
+
+    private void updateToken(String token){
+
+    }
+
+    private void chatList() {
+
+    }
 }

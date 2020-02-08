@@ -23,9 +23,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public static  final int MSG_TYPE_LEFT = 0;
     public static  final int MSG_TYPE_RIGHT = 1;
 
+    private String imageurl;
     private Context mContext;
     private List<Chat> mChat;
-    private String imageurl;
 
     FirebaseUser fuser;
 
@@ -65,6 +65,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public int getItemCount() {
         return mChat.size();
     }
+
 
     public  class ViewHolder extends RecyclerView.ViewHolder{
 

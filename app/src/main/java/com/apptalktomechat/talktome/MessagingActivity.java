@@ -109,13 +109,13 @@ public class MessagingActivity extends AppCompatActivity {
                 User user = snapshot.getValue(User.class);
                 assert user != null;
                 username.setText(user.getUsername());
-                if(user.getImage() == null){
+                if(user.getImageURL() == null){
                     profile_image.setImageResource(R.mipmap.ic_launcher);
                 }else{
-                    Glide.with(MessagingActivity.this).load(user.getImage()).into(profile_image);
+                    Glide.with(MessagingActivity.this).load(user.getImageURL()).into(profile_image);
                 }
 
-                readMesages(fuser.getUid(), idUser, user.getImage());
+                readMesages(fuser.getUid(), idUser, user.getImageURL());
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

@@ -13,11 +13,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.viewpager.widget.ViewPager;
 
 import com.apptalktomechat.talktome.Fragments.ChatsFragment;
-import com.apptalktomechat.talktome.Fragments.ProfilUserFragment;
+import com.apptalktomechat.talktome.Fragments.ProfileFragment;
 import com.apptalktomechat.talktome.Fragments.UsersFragment;
 import com.apptalktomechat.talktome.Model.User;
 import com.bumptech.glide.Glide;
@@ -36,7 +35,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AppBarConfiguration mAppBarConfiguration;
     CircleImageView profile_image;
     TextView username;
 
@@ -63,10 +61,10 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 username.setText(user.getUsername());
-                if (user.getImage() == null){
+                if (user.getImageURL() == null){
                         profile_image.setImageResource(R.mipmap.ic_launcher);
                 }else{
-                    Glide.with(MainActivity.this).load(user.getImage()).into(profile_image);
+                    Glide.with(MainActivity.this).load(user.getImageURL()).into(profile_image);
                 }
             }
 
@@ -83,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
          viewPagerAdapter.addFragment(new ChatsFragment(), "my Chats");
          viewPagerAdapter.addFragment(new UsersFragment(), "My friends");
-         viewPagerAdapter.addFragment(new ProfilUserFragment(), "My profils");
+         viewPagerAdapter.addFragment(new ProfileFragment(), "My profils");
 
          viewPager.setAdapter(viewPagerAdapter);
          tabLayout.setupWithViewPager(viewPager);

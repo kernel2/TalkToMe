@@ -13,7 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ResetPasswordActivity"></activity>
+        <service
+            android:name=".Fragments.APIService"
+            android:exported="false"></service>
+
+        <activity android:name=".ResetPasswordActivity" />
         <activity android:name=".StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

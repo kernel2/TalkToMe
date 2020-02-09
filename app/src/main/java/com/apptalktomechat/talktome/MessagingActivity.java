@@ -69,7 +69,7 @@ public class MessagingActivity extends AppCompatActivity {
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_message);
+            setContentView(R.layout.activity_messaging);
 
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
@@ -79,7 +79,7 @@ public class MessagingActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     // and this
-                    startActivity(new Intent(MessageActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    startActivity(new Intent(MessagingActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 }
             });
 

@@ -57,7 +57,7 @@ public class UsersFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 mUsers.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                        User user = snapshot.getValue(User.class);
+                    User user = snapshot.getValue(User.class);
                     if (user == null) throw new AssertionError();
                     if (firebaseUser == null) throw new AssertionError();
                         if (!user.getId().equals(firebaseUser.getUid())){

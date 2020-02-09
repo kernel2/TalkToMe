@@ -115,7 +115,7 @@ public class MessagingActivity extends AppCompatActivity {
                     Glide.with(MessagingActivity.this).load(user.getImage()).into(profile_image);
                 }
 
-                readMesages(fuser.getUid(), idUser, user.getImageURL());
+                readMesages(fuser.getUid(), idUser, user.getImage());
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

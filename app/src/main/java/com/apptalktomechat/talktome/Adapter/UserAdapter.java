@@ -11,12 +11,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.apptalktomechat.talktome.MainActivity;
 import com.apptalktomechat.talktome.MessagingActivity;
 import com.apptalktomechat.talktome.Model.User;
 import com.apptalktomechat.talktome.R;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
 
@@ -30,20 +33,20 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.user_item, parent, false);
         return new UserAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            final User user = mUsers.get(position);
-            holder.username.setText(user.getUsername());
-            if (null == user.getImage()) {
-                holder.profile_image.setImageResource(R.mipmap.ic_launcher);
-            } else{
-                Glide.with(mContext).load(user.getImage()).into(holder.profile_image);
-            }
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        final User user = mUsers.get(position);
+        holder.username.setText(user.getUsername());
+        if (user.getImage() == null){
+            holder.profile_image.setImageResource(R.mipmap.ic_launcher);
+        }else{
+            Glide.with(mContext).load(user.getImage()).into(holder.profile_image);
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,8 +64,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView username;
-        private ImageView profile_image;
+        public TextView username;
+        public ImageView profile_image;
 
         ViewHolder(View itemView){
             super(itemView);

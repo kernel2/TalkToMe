@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                 String text_password = password.getText().toString();
 
                 if (TextUtils.isEmpty(text_email) || TextUtils.isEmpty(text_password)){
-                    Toast.makeText(LoginActivity.this,"All fileds are required",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,"All fields are required",Toast.LENGTH_SHORT).show();
                 }else {
                     auth.signInWithEmailAndPassword(text_email,text_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override

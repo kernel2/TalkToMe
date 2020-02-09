@@ -24,12 +24,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     private Context mContext;
-    private List<User> mUsers;
+    private List<User> mUsers = new ArrayList<User>();
     private boolean ischat;
 
     String theLastMessage;
@@ -93,10 +94,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        if(mUsers == null){
-            return mUsers.size();
-        }
-        return 1;
+        return mUsers.size();
     }
 
     public  class ViewHolder extends RecyclerView.ViewHolder{

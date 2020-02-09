@@ -13,9 +13,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.navigation.ui.AppBarConfiguration;
 import androidx.viewpager.widget.ViewPager;
 
 import com.apptalktomechat.talktome.Fragments.ChatsFragment;
+import com.apptalktomechat.talktome.Fragments.ProfilUserFragment;
 import com.apptalktomechat.talktome.Fragments.UsersFragment;
 import com.apptalktomechat.talktome.Model.User;
 import com.bumptech.glide.Glide;
@@ -34,6 +36,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private AppBarConfiguration mAppBarConfiguration;
     CircleImageView profile_image;
     TextView username;
 
@@ -49,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 
-
         profile_image = findViewById(R.id.profile_image);
         username = findViewById(R.id.username);
 
@@ -61,10 +63,10 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 username.setText(user.getUsername());
-                if (user.getImageURL() == null){
+                if (user.getImage() == null){
                         profile_image.setImageResource(R.mipmap.ic_launcher);
                 }else{
-                    Glide.with(MainActivity.this).load(user.getImageURL()).into(profile_image);
+                    Glide.with(MainActivity.this).load(user.getImage()).into(profile_image);
                 }
             }
 
@@ -79,13 +81,16 @@ public class MainActivity extends AppCompatActivity {
 
          ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-         viewPagerAdapter.addFragment(new ChatsFragment(), "Chats");
-         viewPagerAdapter.addFragment(new UsersFragment(), "Users");
+         viewPagerAdapter.addFragment(new ChatsFragment(), "my Chats");
+         viewPagerAdapter.addFragment(new UsersFragment(), "My friends");
+         viewPagerAdapter.addFragment(new ProfilUserFragment(), "My profils");
 
          viewPager.setAdapter(viewPagerAdapter);
          tabLayout.setupWithViewPager(viewPager);
 
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

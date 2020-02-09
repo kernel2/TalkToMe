@@ -2,19 +2,24 @@ package com.apptalktomechat.talktome.Model;
 
 public class User {
 
+    private String email;
     private String id;
     private String username;
-    private String imageURL;
+    private String image;
 
-    public User(String id, String username, String imageURL) {
+    public User(String email, String id, String image, String username) {
         this.id = id;
         this.username = username;
-        this.imageURL = imageURL;
+        this.image = image;
     }
 
     public User(){
 
     }
+
+    public String getEmail() { return email; }
+
+    public void setEmail(String email) { this.email = email; }
 
     public String getId() {
         return id;
@@ -32,12 +37,12 @@ public class User {
         this.username = username;
     }
 
-    public String getImageURL() {
-        return imageURL;
+    public String getImage(){
+        return image;
     }
 
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
+    public void setImage(String image) {
+        this.image = image;
     }
 
 }

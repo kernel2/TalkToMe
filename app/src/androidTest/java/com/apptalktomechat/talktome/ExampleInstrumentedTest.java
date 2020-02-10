@@ -3,8 +3,6 @@ package com.apptalktomechat.talktome;
 import android.content.Context;
 
 import androidx.test.InstrumentationRegistry;
-import androidx.test.platform.app.InstrumentationRegistry;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.runner.AndroidJUnit4;
 
 import org.junit.Test;
@@ -22,7 +20,7 @@ public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() {
         // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.apptalktomechat.talktome", appContext.getPackageName());
     }

@@ -1,7 +1,7 @@
 package com.apptalktomechat.talktome;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -128,7 +128,7 @@ public class MessagingActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     User user = dataSnapshot.getValue(User.class);
                     username.setText(user.getUsername());
-                    if (user.getImageURL().equals("default")){
+                    if ("default".equals(user.getImageURL())){
                         profile_image.setImageResource(R.mipmap.ic_launcher);
                     } else {
                         //and this

@@ -59,10 +59,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/text_send"
             android:background="@android:color/transparent"
-            android:hint="@string/type_a_message"
+            android:hint="Type a message..."
             android:layout_toLeftOf="@id/btn_send"
-            android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/btn_send" />
+            android:layout_centerVertical="true"/>
 
         <ImageButton
             android:layout_width="40dp"

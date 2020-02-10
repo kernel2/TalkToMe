@@ -1,6 +1,9 @@
 package com.apptalktomechat.talktome.Fragments;
 
 
+import com.apptalktomechat.talktome.Notifications.MyResponse;
+import com.apptalktomechat.talktome.Notifications.Sender;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Headers;

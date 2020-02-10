@@ -18,8 +18,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apptalktomechat.talktome.Adapter.MessageAdapter;
+import com.apptalktomechat.talktome.Fragments.APIService;
 import com.apptalktomechat.talktome.Model.Chat;
 import com.apptalktomechat.talktome.Model.User;
+import com.apptalktomechat.talktome.Notifications.Client;
+import com.apptalktomechat.talktome.Notifications.Data;
+import com.apptalktomechat.talktome.Notifications.MyResponse;
+import com.apptalktomechat.talktome.Notifications.Sender;
+import com.apptalktomechat.talktome.Notifications.Token;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -105,7 +111,7 @@ public class MessagingActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     notify = true;
                     String msg = text_send.getText().toString();
-                    if (!msg.equals("")){
+                    if (!"".equals(msg)){
                         sendMessage(fuser.getUid(), userid, msg);
                     } else {
                         Toast.makeText(MessagingActivity.this, "You can't send empty message", Toast.LENGTH_SHORT).show();
@@ -122,7 +128,7 @@ public class MessagingActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     User user = dataSnapshot.getValue(User.class);
                     username.setText(user.getUsername());
-                    if (user.getImageURL().equals("default")){
+                    if (user.getImageURL() == null){
                         profile_image.setImageResource(R.mipmap.ic_launcher);
                     } else {
                         //and this
@@ -148,7 +154,7 @@ public class MessagingActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                         Chat chat = snapshot.getValue(Chat.class);
-                        if (chat.getReceiver().equals(fuser.getUid()) && chat.getSender().equals(userid)){
+                        if (fuser.getUid().equals(chat.getReceiver()) && userid.equals(chat.getSender())){
                             HashMap<String, Object> hashMap = new HashMap<>();
                             hashMap.put("isseen", true);
                             snapshot.getRef().updateChildren(hashMap);
@@ -269,8 +275,8 @@ public class MessagingActivity extends AppCompatActivity {
                     mchat.clear();
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                         Chat chat = snapshot.getValue(Chat.class);
-                        if (chat.getReceiver().equals(myid) && chat.getSender().equals(userid) ||
-                                chat.getReceiver().equals(userid) && chat.getSender().equals(myid)){
+                        if (myid.equals(chat.getReceiver()) && userid.equals(chat.getSender()) ||
+                                userid.equals(chat.getReceiver()) && myid.equals(chat.getSender())){
                             mchat.add(chat);
                         }
 

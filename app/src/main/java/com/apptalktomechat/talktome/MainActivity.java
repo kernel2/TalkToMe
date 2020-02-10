@@ -21,6 +21,7 @@ import com.apptalktomechat.talktome.Fragments.UsersFragment;
 import com.apptalktomechat.talktome.Model.Chat;
 import com.apptalktomechat.talktome.Model.User;
 import com.bumptech.glide.Glide;
+
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 username.setText(user.getUsername());
-                if (user.getImageURL().equals("default")){
+                if (user.getImageURL() == null){
                     profile_image.setImageResource(R.mipmap.ic_launcher);
                 } else {
 
@@ -78,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final TabLayout tabLayout = findViewById(R.id.tabl_layout);
+        final TabLayout tabLayout = findViewById(R.id.tab_layout);
         final ViewPager viewPager = findViewById(R.id.view_pager);
 
 
@@ -90,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 int unread = 0;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Chat chat = snapshot.getValue(Chat.class);
-                    if (chat.getReceiver().equals(firebaseUser.getUid()) && !chat.isIsseen()){
+                    if (chat.getReceiver() == firebaseUser.getUid() && !chat.isIsseen()){
                         unread++;
                     }
                 }

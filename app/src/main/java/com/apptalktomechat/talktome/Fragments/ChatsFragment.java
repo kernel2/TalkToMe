@@ -73,8 +73,7 @@ public class ChatsFragment extends Fragment {
         });
 
         updateToken(FirebaseInstanceId.getInstance().getToken());
-
-
+        
         return view;
     }
 

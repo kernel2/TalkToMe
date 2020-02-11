@@ -2,21 +2,25 @@ package com.apptalktomechat.talktome;
 
 import androidx.annotation.NonNull;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.SharedPreferences;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.apptalktomechat.talktome.Adapter.MediaAdapter;
 import com.apptalktomechat.talktome.Adapter.MessageAdapter;
 import com.apptalktomechat.talktome.Fragments.APIService;
 import com.apptalktomechat.talktome.Model.Chat;
@@ -39,7 +43,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -47,6 +50,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MessagingActivity extends AppCompatActivity {
+        private RecyclerView  mMedia;
+        private RecyclerView.Adapter  mMediaAdapter;
+        private RecyclerView.LayoutManager  mMediaLayoutManager;
 
         CircleImageView profile_image;
         TextView username;
@@ -55,6 +61,8 @@ public class MessagingActivity extends AppCompatActivity {
         DatabaseReference reference;
 
         ImageButton btn_send;
+        ImageButton btn_media;
+
         EditText text_send;
 
         MessageAdapter messageAdapter;
@@ -98,8 +106,9 @@ public class MessagingActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(linearLayoutManager);
 
             profile_image = findViewById(R.id.profile_image);
-            username = findViewById(R.id.username);
-            btn_send = findViewById(R.id.btn_send);
+            username  = findViewById(R.id.username);
+            btn_send  = findViewById(R.id.btn_send);
+            btn_media = findViewById(R.id.btn_media);
             text_send = findViewById(R.id.text_send);
 
             intent = getIntent();
@@ -119,6 +128,16 @@ public class MessagingActivity extends AppCompatActivity {
                     text_send.setText("");
                 }
             });
+
+            btn_media.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    notify = true;
+                   openGallery();
+                }
+            });
+
+            initializeMedia();
 
 
             reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
@@ -147,7 +166,8 @@ public class MessagingActivity extends AppCompatActivity {
             seenMessage(userid);
         }
 
-        private void seenMessage(final String userid){
+
+    private void seenMessage(final String userid){
             reference = FirebaseDatabase.getInstance().getReference("Chats");
             seenListener = reference.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -169,7 +189,46 @@ public class MessagingActivity extends AppCompatActivity {
             });
         }
 
-        private void sendMessage(String sender, final String receiver, String message){
+        int PICK_IMAGE_INTENT = 1;
+        ArrayList<String> mediaUriList = new ArrayList<>();
+        private void initializeMedia() {
+            mediaUriList = new ArrayList<>();
+            mMedia= findViewById(R.id.recycler_view);
+            mMedia.setNestedScrollingEnabled(false);
+            mMedia.setHasFixedSize(false);
+            mMediaLayoutManager = new  LinearLayoutManager(getApplicationContext());
+            mMedia.setLayoutManager(mMediaLayoutManager);
+            mMediaAdapter = new MediaAdapter(getApplicationContext(), mediaUriList);
+            mMedia.setAdapter(mMediaAdapter);
+        }
+        private void openGallery() {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.putExtra(intent.EXTRA_ALLOW_MULTIPLE, true);
+            intent.setAction(intent.ACTION_GET_CONTENT);
+            this.startActivityForResult(intent, PICK_IMAGE_INTENT);
+
+        }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK){
+            if (requestCode == PICK_IMAGE_INTENT){
+                if (data.getClipData() == null){
+                    mediaUriList.add(data.getData().toString());
+                }else{
+                    for (int i =0; i < data.getClipData().getItemCount();i++ ){
+                        mediaUriList.add(data.getClipData().getItemAt(i).getUri().toString());
+                    }
+                }
+                mMediaAdapter.notifyDataSetChanged();
+            }
+        }
+    }
+
+    private void sendMessage(String sender, final String receiver, String message){
 
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 

@@ -54,22 +54,33 @@
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/text_send"
-            android:background="@android:color/transparent"
-            android:hint="Type a message..."
-            android:layout_toLeftOf="@id/btn_send"
-            android:layout_centerVertical="true"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_send"
+                android:background="@android:color/transparent"
+                android:hint="Type a message..."
+                android:layout_toLeftOf="@id/btn_send"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true" />
 
         <ImageButton
+            android:id="@+id/btn_media"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@drawable/ic_action_name"
-            android:id="@+id/btn_send"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true" />
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="315dp"
+            android:background="@drawable/ic_action_media_name" />
+
+        <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_action_name"
+                android:id="@+id/btn_send"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true" />
 
     </RelativeLayout>
 

@@ -5,12 +5,14 @@ public class Chat {
     private String sender;
     private String receiver;
     private String message;
+    private String mediaId;
     private boolean isseen;
 
-    public Chat(String sender, String receiver, String message, boolean isseen) {
+    public Chat(String sender, String receiver, String message, String mediaId, boolean isseen) {
         this.sender = sender;
         this.receiver = receiver;
         this.message = message;
+        this.mediaId = mediaId;
         this.isseen = isseen;
     }
 
@@ -40,6 +42,10 @@ public class Chat {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    public String getMediaId() { return mediaId; }
+
+    public void setMediaId(String mediaId) { this.mediaId = mediaId; }
 
     public boolean isIsseen() {
         return isseen;
